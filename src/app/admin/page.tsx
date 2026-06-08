@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { AdminMatchRow } from "@/components/admin-match-row";
+import { SeedButton } from "@/components/seed-button";
 import { isAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
 
@@ -33,6 +34,8 @@ export default async function AdminPage() {
         title="Panel administratora"
         description="Wprowadzaj wyniki meczów — punkty graczy przeliczają się automatycznie."
       />
+
+      <SeedButton />
 
       <div className="im-card overflow-x-auto rounded-lg">
         <table className="w-full min-w-[640px]">
