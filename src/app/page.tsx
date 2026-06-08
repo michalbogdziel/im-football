@@ -110,8 +110,8 @@ export default function HomePage() {
       </section>
 
       {/* Guide Section */}
-      <section className="bg-white px-[5%] py-20 md:py-28 border-b border-neutral-100">
-        <div className="mx-auto max-w-[1500px]">
+      <section className="bg-white py-20 md:py-28 border-b border-neutral-100">
+        <div className="mx-auto max-w-[1500px] px-[5%]">
           <div className="mb-16 text-center max-w-2xl mx-auto">
             <span className="text-accent text-sm font-extrabold tracking-wider uppercase mb-2 block">
               Proste kroki
@@ -152,8 +152,8 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="bg-neutral-50/50 px-[5%] py-20 md:py-28">
-        <div className="mx-auto max-w-[1500px]">
+      <section className="bg-neutral-50/50 py-20 md:py-28">
+        <div className="mx-auto max-w-[1500px] px-[5%]">
           <div className="mb-16 text-center max-w-2xl mx-auto">
             <span className="text-accent text-sm font-extrabold tracking-wider uppercase mb-2 block">
               Dlaczego warto?
