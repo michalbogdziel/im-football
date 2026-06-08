@@ -4,8 +4,18 @@ import { PrismaPg } from "@prisma/adapter-pg";
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
 function createPrismaClient() {
-  const url = process.env.DATABASE_URL!;
+  const url = process.env.DATABASE_URL;
   
+  if (!url) {
+    // Fallback for build time / missing env vars
+    const adapter = new PrismaPg({
+      connectionString: "postgresql://dummy:dummy@localhost:5432/dummy",
+    });
+    return new PrismaClient({
+      adapter,
+    });
+  }
+
   if (url.startsWith("prisma+postgres://")) {
     return new PrismaClient({
       accelerateUrl: url,
