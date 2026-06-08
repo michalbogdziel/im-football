@@ -1,83 +1,108 @@
+import Image from "next/image";
+import Link from "next/link";
 import { HomeAuthButtons } from "@/components/home-auth-buttons";
-import { SCORING_RULES } from "@/lib/scoring";
+
+const steps = [
+  {
+    number: "01",
+    title: "Zarejestruj się",
+    description: (
+      <>
+        Zarejestruj się na stronie używając linku —{" "}
+        <Link href="/sign-up" className="text-accent hover:underline">
+          rejestracja
+        </Link>
+        .
+      </>
+    ),
+  },
+  {
+    number: "02",
+    title: "Zaloguj się",
+    description: (
+      <>
+        Po poprawnej rejestracji możesz{" "}
+        <Link href="/sign-in" className="text-accent hover:underline">
+          zalogować się
+        </Link>{" "}
+        na swoje konto.
+      </>
+    ),
+  },
+  {
+    number: "03",
+    title: "Typuj mecze",
+    description: (
+      <>
+        Po zalogowaniu w menu pojawi się pozycja{" "}
+        <strong>Typowanie</strong> — tam podajesz wyniki przed meczami.
+      </>
+    ),
+  },
+];
 
 export default function HomePage() {
   return (
-    <div className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent" />
+    <div>
+      <section className="relative min-h-[calc(100vh-85px)] bg-white">
+        <div className="mx-auto grid max-w-[1500px] lg:grid-cols-2 lg:min-h-[calc(100vh-85px)]">
+          <div className="flex flex-col justify-center px-[5%] py-16 lg:py-24">
+            <Image
+              src="/images/ball.png"
+              alt="Piłka"
+              width={200}
+              height={200}
+              className="mx-auto lg:mx-0 mb-6 h-[120px] w-auto md:h-[160px] lg:h-[200px]"
+            />
+            <h1 className="text-center lg:text-left im-section-title text-[clamp(3.5rem,12vw,8.75rem)] mb-6">
+              MUNDIAL 2026
+            </h1>
+            <p className="text-center lg:text-left text-[clamp(1.1rem,2.5vw,1.75rem)] font-medium text-[#1b1b1b] leading-tight px-[8%] lg:px-0">
+              Witamy na stronie do typowania wyników meczów turnieju Mundial
+              2026 pracowników Inter-Metal.
+            </p>
+            <div className="mt-10 flex justify-center lg:justify-start">
+              <HomeAuthButtons />
+            </div>
+          </div>
 
-      <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
-        <div className="text-center">
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
-            Mistrzostwa Świata 2026
-          </p>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl">
-            Typy firmowe
-            <br />
-            <span className="text-accent">Mundial 2026</span>
-          </h1>
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-muted">
-            Portal dla pracowników do obstawiania wyników meczów. Typuj przed
-            rozpoczęciem meczu, zdobywaj punkty i walcz o pierwsze miejsce w
-            rankingu!
-          </p>
-
-          <HomeAuthButtons />
-        </div>
-
-        <div className="mt-20 grid gap-6 sm:grid-cols-3">
-          <FeatureCard
-            icon="🎯"
-            title="Typuj wyniki"
-            description="Podawaj wyniki przed rozpoczęciem każdego meczu. Możesz edytować typ do momentu pierwszego gwizdka."
-          />
-          <FeatureCard
-            icon="🏆"
-            title="Zdobywaj punkty"
-            description="Dokładny wynik to 3 pkt, poprawna różnica bramek 2 pkt, trafiony zwycięzca 1 pkt."
-          />
-          <FeatureCard
-            icon="📊"
-            title="Śledź ranking"
-            description="Porównuj wyniki z kolegami i koleżankami z pracy w live rankingu."
+          <div
+            className="relative min-h-[320px] lg:min-h-full bg-center bg-contain bg-no-repeat"
+            style={{ backgroundImage: "url(/images/hero-player.png)" }}
+            aria-hidden
           />
         </div>
+      </section>
 
-        <div className="mt-16 rounded-2xl border border-card-border bg-card p-8">
-          <h2 className="mb-6 text-xl font-semibold">System punktacji</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {SCORING_RULES.map((rule) => (
-              <div
-                key={rule.points}
-                className="flex items-center gap-4 rounded-xl bg-background/50 px-4 py-3"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-lg font-bold text-accent">
-                  {rule.points}
-                </span>
-                <span className="text-muted">{rule.label}</span>
+      <section className="bg-white px-[5%] py-16 md:py-24">
+        <div className="mx-auto max-w-[1500px]">
+          <div className="mb-16 max-w-xl">
+            <h2 className="im-section-title text-[clamp(2.5rem,6vw,5rem)] mb-6">
+              Jak zacząć typować?
+            </h2>
+            <p className="text-muted text-lg leading-relaxed tracking-wide">
+              Kieruj się krokami opisanymi obok w celu poprawnego utworzenia
+              konta oraz zamieszczenia swoich wyników w tabelkach typowania
+              Mundial 2026.
+            </p>
+          </div>
+
+          <div className="grid gap-10 md:grid-cols-3">
+            {steps.map((step) => (
+              <div key={step.number} className="flex flex-col">
+                <div className="mb-4 h-0.5 w-3/4 bg-foreground" />
+                <span className="im-step-number mb-4">{step.number}</span>
+                <h3 className="text-[clamp(1.25rem,2vw,2rem)] font-bold text-foreground mb-6">
+                  {step.title}
+                </h3>
+                <p className="text-[17px] text-foreground leading-relaxed">
+                  {step.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function FeatureCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-card-border bg-card p-6">
-      <div className="mb-4 text-3xl">{icon}</div>
-      <h3 className="mb-2 text-lg font-semibold">{title}</h3>
-      <p className="text-sm text-muted leading-relaxed">{description}</p>
+      </section>
     </div>
   );
 }

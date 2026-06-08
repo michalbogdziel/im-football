@@ -5,42 +5,24 @@ import Link from "next/link";
 
 export function HomeAuthButtons() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4">
+    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
       <Show
         when="signed-out"
         fallback={
-          <Link
-            href="/dashboard"
-            className="rounded-xl bg-accent px-8 py-3 text-base font-semibold text-black hover:bg-accent/90 transition-colors"
-          >
+          <Link href="/dashboard" className="btn-primary rounded px-8 py-3 text-base">
             Przejdź do panelu
           </Link>
         }
       >
-        <Link
-          href="/sign-up"
-          className="rounded-xl bg-accent px-8 py-3 text-base font-semibold text-black hover:bg-accent/90 transition-colors"
-        >
+        <Link href="/sign-up" className="btn-primary rounded px-8 py-3 text-base">
           Zarejestruj się
         </Link>
-        <Link
-          href="/sign-in"
-          className="rounded-xl border border-card-border px-8 py-3 text-base font-medium hover:bg-white/5 transition-colors"
-        >
+        <Link href="/sign-in" className="btn-outline rounded px-8 py-3 text-base">
           Zaloguj się
         </Link>
       </Show>
-      <Link
-        href="/ranking"
-        className="rounded-xl border border-card-border px-8 py-3 text-base font-medium hover:bg-white/5 transition-colors"
-      >
-        Zobacz ranking
-      </Link>
-      <Link
-        href="/typy"
-        className="rounded-xl border border-card-border px-8 py-3 text-base font-medium hover:bg-white/5 transition-colors"
-      >
-        Typy meczów
+      <Link href="/ranking" className="btn-outline rounded px-8 py-3 text-base">
+        Ranking
       </Link>
     </div>
   );

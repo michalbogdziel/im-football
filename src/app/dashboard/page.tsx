@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getOrCreateUser } from "@/lib/auth";
+import { PageHeader } from "@/components/page-header";
+import { getOrCreateUser, isMatchLocked } from "@/lib/auth";
 import { getLeaderboard } from "@/lib/actions";
 import { db } from "@/lib/db";
-import { isMatchLocked } from "@/lib/auth";
 
 export default async function DashboardPage() {
   const user = await getOrCreateUser();
@@ -31,22 +31,15 @@ export default async function DashboardPage() {
   });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">
-          Witaj, {user?.name ?? "Graczu"}! 👋
-        </h1>
-        <p className="mt-2 text-muted">
-          Oto Twój panel na Mundial 2026
-        </p>
-      </div>
+    <div className="mx-auto max-w-[1500px] px-[5%] py-12 md:py-16">
+      <PageHeader
+        title={`Witaj, ${user?.name ?? "Graczu"}!`}
+        description="Podsumowanie Twoich wyników w typowaniu Mundial 2026."
+      />
 
       <div className="mb-10 grid gap-4 sm:grid-cols-3">
         <StatCard label="Twoje punkty" value={String(myPoints)} accent />
-        <StatCard
-          label="Twoja pozycja"
-          value={myRank ? `#${myRank}` : "—"}
-        />
+        <StatCard label="Twoja pozycja" value={myRank ? `#${myRank}` : "—"} />
         <StatCard
           label="Typy do uzupełnienia"
           value={String(pendingPredictions.length)}
@@ -54,25 +47,22 @@ export default async function DashboardPage() {
       </div>
 
       {pendingPredictions.length > 0 && (
-        <div className="mb-10 rounded-2xl border border-accent/30 bg-accent/5 p-6">
+        <div className="mb-10 im-card rounded-lg border-accent/40 bg-accent/5 p-6">
           <h2 className="mb-2 text-lg font-semibold text-accent">
             Masz {pendingPredictions.length} mecz(y) bez typu!
           </h2>
           <p className="mb-4 text-sm text-muted">
             Uzupełnij typy zanim rozpoczną się mecze.
           </p>
-          <Link
-            href="/typy"
-            className="inline-block rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-black hover:bg-accent/90"
-          >
-            Przejdź do typów
+          <Link href="/typy" className="btn-primary inline-block rounded px-5 py-2 text-sm">
+            Przejdź do typowania
           </Link>
         </div>
       )}
 
       <div className="grid gap-8 lg:grid-cols-2">
         <section>
-          <h2 className="mb-4 text-xl font-semibold">Nadchodzące mecze</h2>
+          <h2 className="im-section-title text-2xl mb-4">Nadchodzące mecze</h2>
           <div className="space-y-3">
             {upcomingMatches.length === 0 ? (
               <p className="text-muted text-sm">Brak nadchodzących meczów.</p>
@@ -84,7 +74,7 @@ export default async function DashboardPage() {
                 return (
                   <div
                     key={match.id}
-                    className="rounded-xl border border-card-border bg-card px-4 py-3"
+                    className="im-card rounded-lg px-4 py-3"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-medium">
@@ -95,7 +85,7 @@ export default async function DashboardPage() {
                           Typ: {prediction.homeScore}:{prediction.awayScore}
                         </span>
                       ) : (
-                        <span className="text-sm text-red-400">Brak typu</span>
+                        <span className="text-sm text-red-500">Brak typu</span>
                       )}
                     </div>
                     <p className="text-xs text-muted mt-1">{match.stage}</p>
@@ -107,11 +97,11 @@ export default async function DashboardPage() {
         </section>
 
         <section>
-          <h2 className="mb-4 text-xl font-semibold">Top 5 rankingu</h2>
-          <div className="rounded-xl border border-card-border bg-card overflow-hidden">
+          <h2 className="im-section-title text-2xl mb-4">Top 5 rankingu</h2>
+          <div className="im-card overflow-hidden rounded-lg">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-card-border text-left text-muted">
+                <tr className="border-b border-card-border bg-[#f9fafd] text-left text-muted">
                   <th className="px-4 py-3">#</th>
                   <th className="px-4 py-3">Gracz</th>
                   <th className="px-4 py-3 text-right">Pkt</th>
@@ -164,11 +154,9 @@ function StatCard({
   accent?: boolean;
 }) {
   return (
-    <div className="rounded-2xl border border-card-border bg-card p-6">
+    <div className="im-card rounded-lg p-6">
       <p className="text-sm text-muted">{label}</p>
-      <p
-        className={`mt-1 text-3xl font-bold ${accent ? "text-accent" : ""}`}
-      >
+      <p className={`mt-1 text-3xl font-bold ${accent ? "text-accent" : ""}`}>
         {value}
       </p>
     </div>

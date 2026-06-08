@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
+import { PageHeader } from "@/components/page-header";
+import { AdminMatchRow } from "@/components/admin-match-row";
 import { isAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { AdminMatchRow } from "@/components/admin-match-row";
 
 export default async function AdminPage() {
   if (!(await isAdmin())) {
@@ -27,18 +28,16 @@ export default async function AdminPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Panel administratora</h1>
-        <p className="mt-2 text-muted">
-          Wprowadzaj wyniki meczów — punkty graczy przeliczają się automatycznie.
-        </p>
-      </div>
+    <div className="mx-auto max-w-[1500px] px-[5%] py-12 md:py-16">
+      <PageHeader
+        title="Panel administratora"
+        description="Wprowadzaj wyniki meczów — punkty graczy przeliczają się automatycznie."
+      />
 
-      <div className="rounded-2xl border border-card-border bg-card overflow-x-auto">
+      <div className="im-card overflow-x-auto rounded-lg">
         <table className="w-full min-w-[640px]">
           <thead>
-            <tr className="border-b border-card-border text-left text-sm text-muted">
+            <tr className="border-b border-card-border bg-[#f9fafd] text-left text-sm text-muted">
               <th className="px-4 py-3">Data</th>
               <th className="px-4 py-3">Mecz</th>
               <th className="px-4 py-3">Typy</th>

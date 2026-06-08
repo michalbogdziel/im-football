@@ -41,7 +41,7 @@ export function MatchCard({ match }: { match: Match }) {
   }
 
   return (
-    <article className="rounded-xl border border-card-border bg-card p-5">
+    <article className="im-card rounded-lg p-5 shadow-sm">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm text-muted">
         <span>
           {match.stage}
@@ -77,7 +77,7 @@ export function MatchCard({ match }: { match: Match }) {
       )}
 
       {match.locked ? (
-        <div className="rounded-lg bg-white/5 px-4 py-3 text-center text-sm text-muted">
+        <div className="rounded-lg bg-[#f9fafd] px-4 py-3 text-center text-sm text-muted">
           {match.prediction ? (
             <>
               Twój typ:{" "}
@@ -117,7 +117,7 @@ export function MatchCard({ match }: { match: Match }) {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full rounded-lg bg-accent py-2.5 text-sm font-semibold text-black hover:bg-accent/90 disabled:opacity-50 transition-colors"
+            className="btn-primary w-full rounded py-2.5 text-sm disabled:opacity-50"
           >
             {isPending ? "Zapisywanie..." : match.prediction ? "Zaktualizuj typ" : "Zapisz typ"}
           </button>

@@ -1,6 +1,7 @@
+import { PageHeader } from "@/components/page-header";
+import { MatchCard } from "@/components/match-card";
 import { getOrCreateUser, isMatchLocked } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { MatchCard } from "@/components/match-card";
 
 export default async function TypyPage() {
   const user = await getOrCreateUser();
@@ -39,21 +40,18 @@ export default async function TypyPage() {
   const closedMatches = matchCards.filter((m) => m.locked);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Typy meczów</h1>
-        <p className="mt-2 text-muted">
-          Podawaj wyniki przed rozpoczęciem meczu. Edycja możliwa do pierwszego
-          gwizdka.
-        </p>
-      </div>
+    <div className="mx-auto max-w-[1500px] px-[5%] py-12 md:py-16">
+      <PageHeader
+        title="Typowanie"
+        description="Podawaj wyniki przed rozpoczęciem meczu. Edycja możliwa do pierwszego gwizdka."
+      />
 
       {openMatches.length > 0 && (
         <section className="mb-12">
-          <h2 className="mb-4 text-xl font-semibold text-accent">
+          <h2 className="im-section-title text-2xl mb-4 text-accent">
             Otwarte typowanie ({openMatches.length})
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {openMatches.map((match) => (
               <MatchCard key={match.id} match={match} />
             ))}
@@ -63,10 +61,10 @@ export default async function TypyPage() {
 
       {closedMatches.length > 0 && (
         <section>
-          <h2 className="mb-4 text-xl font-semibold text-muted">
+          <h2 className="im-section-title text-2xl mb-4 text-muted">
             Zakończone / zamknięte ({closedMatches.length})
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {closedMatches.map((match) => (
               <MatchCard key={match.id} match={match} />
             ))}
@@ -75,7 +73,7 @@ export default async function TypyPage() {
       )}
 
       {matches.length === 0 && (
-        <div className="rounded-2xl border border-card-border bg-card p-10 text-center">
+        <div className="im-card rounded-lg p-10 text-center">
           <p className="text-muted">
             Brak meczów w bazie. Uruchom seed:{" "}
             <code className="text-accent">npm run db:seed</code>

@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/page-header";
 import { getLeaderboard } from "@/lib/actions";
 import { getOrCreateUser } from "@/lib/auth";
 
@@ -6,18 +7,16 @@ export default async function RankingPage() {
   const leaderboard = await getLeaderboard();
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">🏆 Ranking</h1>
-        <p className="mt-2 text-muted">
-          Klasyfikacja generalna wszystkich graczy
-        </p>
-      </div>
+    <div className="mx-auto max-w-[1500px] px-[5%] py-12 md:py-16">
+      <PageHeader
+        title="Ranking"
+        description="Klasyfikacja generalna wszystkich graczy"
+      />
 
-      <div className="rounded-2xl border border-card-border bg-card overflow-hidden">
+      <div className="im-card overflow-hidden rounded-lg">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-card-border text-left text-sm text-muted">
+            <tr className="border-b border-card-border bg-[#f9fafd] text-left text-sm text-muted">
               <th className="px-6 py-4 w-16">#</th>
               <th className="px-6 py-4">Gracz</th>
               <th className="px-6 py-4 text-center hidden sm:table-cell">
@@ -36,12 +35,10 @@ export default async function RankingPage() {
                 <tr
                   key={entry.id}
                   className={`border-b border-card-border last:border-0 transition-colors ${
-                    isMe ? "bg-accent/10" : "hover:bg-white/2"
+                    isMe ? "bg-accent/10" : "hover:bg-[#f9fafd]"
                   }`}
                 >
-                  <td className="px-6 py-4 font-medium">
-                    {medal ?? index + 1}
-                  </td>
+                  <td className="px-6 py-4 font-medium">{medal ?? index + 1}</td>
                   <td className="px-6 py-4">
                     <div className="font-medium">
                       {entry.name}
